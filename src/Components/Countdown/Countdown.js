@@ -1,4 +1,3 @@
-import Paper from "@material-ui/core/Paper";
 import React from "react";
 
 class Countdown extends React.Component {
@@ -106,29 +105,29 @@ class Countdown extends React.Component {
           <table style={{ textAlign: "center" }}>
             <tr>
               <td style={{ width: "10%" }}>
-                <Paper>
+                <div>
                   <h2>{this.state.days}</h2>
-                </Paper>
+                </div>
               </td>
               <td style={{ width: "10%" }} style={{ width: "10%" }}>
-                <Paper>
+                <div>
                   <h2>{this.state.hours}</h2>
-                </Paper>
+                </div>
               </td>
               <td style={{ width: "10%" }}>
-                <Paper>
+                <div>
                   <h2>{this.state.minutes}</h2>
-                </Paper>
+                </div>
               </td>
               <td style={{ width: "10%" }}>
-                <Paper>
+                <div>
                   <h2>{this.state.seconds}</h2>
-                </Paper>
+                </div>
               </td>
               <td style={{ width: "10%" }}>
-                <Paper>
+                <div>
                   <h2>{this.state.milliseconds}</h2>
-                </Paper>
+                </div>
               </td>
             </tr>
             <tr>
