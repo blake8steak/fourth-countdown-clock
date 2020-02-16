@@ -48,8 +48,7 @@ class Countdown extends React.Component {
     }
 
     if (
-      (dayToFind.getFullYear() % 4 === 0 &&
-        dayToFind % 100 === 0) ||
+      (dayToFind.getFullYear() % 4 === 0 && dayToFind % 100 === 0) ||
       dayToFind % 400 === 0
     ) {
       daysInFeb = 28;
@@ -58,26 +57,21 @@ class Countdown extends React.Component {
       daysInFeb = 29;
       daysInCurrentYear = 366;
     }
-    daysInMonths = [
-        31,
-        daysInFeb,
-        31,
-        30,
-        31,
-        30,
-        31,
-        31,
-        30,
-        31,
-        30,
-        31
-      ];
-     
-    for(let i=0; i<dayToFind.getMonth(); i++){
-        dayToFindNum += daysInMonths[i];
+    daysInMonths = [31, daysInFeb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    for (let i = 0; i < dayToFind.getMonth(); i++) {
+      dayToFindNum += daysInMonths[i];
     }
 
-    return dayToFindNum;
+    for (let i = 0; i < dayToFind.getDate(); i++) {
+      dayToFindNum += 1;
+    }
+
+    if(this.state.julyFourth.getFullYear() === dayToFind.getFullYear()) {
+      return julyFourthDayNumber - dayToFindNum - 1;
+    } else {
+      return (daysInCurrentYear-dayToFindNum)+julyFourthDayNumber;
+    }
   }
 
   componentDidMount() {
@@ -109,7 +103,7 @@ class Countdown extends React.Component {
                   <h2>{this.state.days}</h2>
                 </div>
               </td>
-              <td style={{ width: "10%" }} style={{ width: "10%" }}>
+              <td style={{ width: "10%" }}>
                 <div>
                   <h2>{this.state.hours}</h2>
                 </div>
