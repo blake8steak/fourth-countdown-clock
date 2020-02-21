@@ -10,7 +10,8 @@ class Countdown extends React.Component {
       hours: 0,
       minutes: 0,
       seconds: 0,
-      milliseconds: 0
+      milliseconds: 0,
+      fireworkMode: false
     };
   }
 
@@ -67,28 +68,72 @@ class Countdown extends React.Component {
       dayToFindNum += 1;
     }
 
+    let ret = 0;
+
     if(this.state.julyFourth.getFullYear() === dayToFind.getFullYear()) {
-      return julyFourthDayNumber - dayToFindNum - 1;
+      ret = julyFourthDayNumber - dayToFindNum - 1;
     } else {
-      return (daysInCurrentYear-dayToFindNum)+julyFourthDayNumber;
+      ret = (daysInCurrentYear-dayToFindNum)+julyFourthDayNumber;
     }
+
+    if(this.state.fireworkMode) {
+      if(dayToFind.getHours() > 19){
+        return ret-1;
+      } else {
+        return ret;
+      }
+    } else {
+      return ret;
+    }
+  }
+
+  getHourDiff(current) {
+    if(current > 19 && current < 24){ //past 8pm
+      
+      return 23 - (current-20);
+    } else { //not past 8pm
+      return 23 - current + 4;
+    }
+
+    //0 - 23
+    //8pm is 19
+    //past 8pm, hours set to 23, 
   }
 
   componentDidMount() {
     this.myInterval = setInterval(() => {
       const now = new Date();
-      this.setState(({ milliseconds }) => ({
-        milliseconds: 1000 - now.getMilliseconds(),
-        days: this.getDaysUntilTheForth(now),
-        hours: now.getHours() === 0 ? 0 : 23 - now.getHours(),
-        minutes: 59 - now.getMinutes(),
-        seconds: now.getSeconds() === 0 ? 0 : 60 - now.getSeconds()
-      }));
+      if(this.state.fireworkMode){
+        this.setState(({ milliseconds }) => ({
+          milliseconds: 1000 - now.getMilliseconds(),
+          days: this.getDaysUntilTheForth(now),
+          //hours: now.getHours() === 0 ? 0 : 23 - now.getHours(),
+          hours: now.getHours() === 0 ? 0 : this.getHourDiff(now.getHours()),
+          minutes: 59 - now.getMinutes(),
+          seconds: now.getSeconds() === 0 ? 0 : 60 - now.getSeconds()
+        }));
+      } else {
+        this.setState(({ milliseconds }) => ({
+          milliseconds: 1000 - now.getMilliseconds(),
+          days: this.getDaysUntilTheForth(now),
+          hours: now.getHours() === 0 ? 0 : 23 - now.getHours(),
+          //hours: now.getHours() === 0 ? 0 : this.getHourDiff(now.getHours()),
+          minutes: 59 - now.getMinutes(),
+          seconds: now.getSeconds() === 0 ? 0 : 60 - now.getSeconds()
+        }));
+      }
     }, 1);
   }
 
   componentWillUnmount() {
     clearInterval(this.myInterval);
+  }
+
+  toggleMode() {
+    this.setState({
+      fireworkMode: !this.state.fireworkMode
+    });
+    console.log(this.state.fireworkMode)
   }
 
   render() {
@@ -142,6 +187,10 @@ class Countdown extends React.Component {
               </td>
             </tr>
           </table>
+          <br />
+          <input type="checkbox" id="8pm" value={this.state.fireworkMode} onClick={e => this.toggleMode()}/>
+          <label for="8pm"> <b>Countdown to 8PM Fireworks</b></label>
+          <br />
         </center>
       </>
     );

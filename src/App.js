@@ -39,11 +39,14 @@ function App() {
             top: "20%",
             backgroundColor: "#ffffff",
             width: "70%",
-            height: "20%",
+            height: "24%",
+            minWidth: 500,
+            minHeight: 250,
             opacity: 0.9
           }}
         >
           <Countdown />
+          
         </div>
       </center>
     </div>
