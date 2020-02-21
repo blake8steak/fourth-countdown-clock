@@ -70,17 +70,17 @@ class Countdown extends React.Component {
 
     let ret = 0;
 
-    if(this.state.julyFourth.getFullYear() === dayToFind.getFullYear()) {
+    if (this.state.julyFourth.getFullYear() === dayToFind.getFullYear()) {
       ret = julyFourthDayNumber - dayToFindNum - 1;
     } else {
-      ret = (daysInCurrentYear-dayToFindNum)+julyFourthDayNumber;
+      ret = daysInCurrentYear - dayToFindNum + julyFourthDayNumber;
     }
 
-    if(this.state.fireworkMode) {
-      if(dayToFind.getHours() > 19){
-        return ret-1;
+    if (this.state.fireworkMode) {
+      if (dayToFind.getHours() > 19) {
+        return ret - 1;
       } else {
-        return ret;
+        return ret + 1;
       }
     } else {
       return ret;
@@ -88,22 +88,24 @@ class Countdown extends React.Component {
   }
 
   getHourDiff(current) {
-    if(current > 19 && current < 24){ //past 8pm
-      
-      return 23 - (current-20);
-    } else { //not past 8pm
-      return 23 - current + 4;
+    if (current > 19 && current < 24) {
+      //past 8pm
+
+      return 23 - (current - 20);
+    } else {
+      //not past 8pm
+      return 23 - current - 4;
     }
 
     //0 - 23
     //8pm is 19
-    //past 8pm, hours set to 23, 
+    //past 8pm, hours set to 23,
   }
 
   componentDidMount() {
     this.myInterval = setInterval(() => {
       const now = new Date();
-      if(this.state.fireworkMode){
+      if (this.state.fireworkMode) {
         this.setState(({ milliseconds }) => ({
           milliseconds: 1000 - now.getMilliseconds(),
           days: this.getDaysUntilTheForth(now),
@@ -133,7 +135,7 @@ class Countdown extends React.Component {
     this.setState({
       fireworkMode: !this.state.fireworkMode
     });
-    console.log(this.state.fireworkMode)
+    console.log(this.state.fireworkMode);
   }
 
   render() {
@@ -188,8 +190,16 @@ class Countdown extends React.Component {
             </tr>
           </table>
           <br />
-          <input type="checkbox" id="8pm" value={this.state.fireworkMode} onClick={e => this.toggleMode()}/>
-          <label for="8pm"> <b>Countdown to 8PM Fireworks</b></label>
+          <input
+            type="checkbox"
+            id="8pm"
+            value={this.state.fireworkMode}
+            onClick={e => this.toggleMode()}
+          />
+          <label for="8pm">
+            {" "}
+            <b>Countdown to 8PM Fireworks</b>
+          </label>
           <br />
         </center>
       </>
