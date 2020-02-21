@@ -41,7 +41,7 @@ function App() {
             width: "70%",
             height: "24%",
             minWidth: 500,
-            minHeight: 250,
+            minHeight: 300,
             opacity: 0.9
           }}
         >
