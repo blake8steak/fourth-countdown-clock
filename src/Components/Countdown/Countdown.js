@@ -78,7 +78,7 @@ class Countdown extends React.Component {
 
     if (this.state.fireworkMode) {
       if (dayToFind.getHours() > 19) {
-        return ret - 1;
+        return ret;
       } else {
         return ret + 1;
       }
