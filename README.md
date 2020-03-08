@@ -1,3 +1,5 @@
+This was my entry to an office code challenge I won while working at ScanData Systems in Austin, Texas.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
