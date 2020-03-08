@@ -3,6 +3,7 @@ This was my entry to an office code challenge I won while working at ScanData Sy
 I created this entirely myself in React, using no additonal libraries.
 
 Hope y'all like it!
+##
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
